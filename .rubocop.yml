@@ -1,0 +1,15 @@
+AllCops:
+  TargetRubyVersion: 2.4
+  Exclude:
+    - '*.spec'
+    - 'Rakefile'
+      #
+# Don't enforce documentation
+Style/Documentation:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 190
