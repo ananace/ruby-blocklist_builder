@@ -7,6 +7,7 @@ module BlocklistBuilder
   class Error < StandardError; end
 
   autoload :Source, 'blocklist_builder/source'
+  autoload :SOURCES, 'blocklist_builder/sources'
 
   module Sources
     autoload :Plain, 'blocklist_builder/sources/plain'
