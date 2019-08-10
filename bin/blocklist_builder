@@ -3,10 +3,16 @@
 require 'blocklist_builder'
 require 'optparse'
 require 'ostruct'
+require 'psych'
 
 options = OpenStruct.new
 parser = OptParse.new do |opts|
   opts.banner = 'Usage: blocklist_builder [options...]'
+
+  opts.on('-c', '--config=FILE', 'Run with a specific configuration file') do |file|
+    raise ArugmentError, 'Not a valid file' unless File.file? file
+    options.config = Psych.load open(file).read
+  end
 
   opts.on('-v', '--verbose', 'Increase log level') do
     options.verbose = true
