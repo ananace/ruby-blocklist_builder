@@ -1,3 +1,28 @@
 #!/bin/env ruby
 
+require 'blocklist_builder'
+require 'optparse'
+require 'ostruct'
+
+options = OpenStruct.new
+parser = OptParse.new do |opts|
+  opts.banner = 'Usage: blocklist_builder [options...]'
+
+  opts.on('-v', '--verbose', 'Increase log level') do
+    options.verbose = true
+  end
+
+  opts.on('-h', '--help', 'Print this text and exit') do
+    puts parser
+    exit
+  end
+
+  opts.on('-V', '--version', 'Print the application version and exit') do
+    puts "BlocklistBuilder v#{BlocklistBuilder::VERSION}"
+    exit
+  end
+end
+parser.parse!
+
+
 
