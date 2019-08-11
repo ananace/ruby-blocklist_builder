@@ -7,18 +7,18 @@ module BlocklistBuilder
     # Matches an entry in a hosts file;
     #
     #   0.0.0.0 fqdn.goes.here
-    HOSTSLINE_REX = /^(?:\d+\.){3}\d+\s+([\w\-_.]+)/.freeze
+    HOSTSLINE_REX = /^(?:\d+\.){3}\d+\s+([\w\-_.]+)+/.freeze
 
     attr_reader :name, :description, :url, :regex, :template
     attr_accessor :enabled
 
-    def self.new(type: :regexp, **params)
-      klass = BlacklistBuilder::Sources.const_get(type.to_s.pascalcase.to_sym)
+    def self.create(type: :regexp, **params)
+      klass = BlocklistBuilder::Sources.const_get(type.to_s.pascalcase.to_sym)
 
       klass.new(**params)
     end
 
-    def initialize(name:, description: nil, url:)
+    def initialize(name:, description: nil, url:, **params)
       @name = name
       @description = description
       @url = url
@@ -42,5 +42,9 @@ module BlocklistBuilder
     def raw_data
       Net::HTTP.get(URI(@url))
     end
+  end
+
+  module Sources
+    autoload :Regexp, 'blocklist_builder/sources/regexp'
   end
 end

@@ -30,5 +30,6 @@ parser = OptParse.new do |opts|
 end
 parser.parse!
 
+backend = BlocklistBuilder::Backend.new name: 'System hosts', type: :hosts, path: '/etc/hosts'
 
 

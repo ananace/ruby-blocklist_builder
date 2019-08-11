@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module BlocklistBuilder::Sources
-  class Regexp < Source
+  class Regexp < BlocklistBuilder::Source
     attr_reader :regex, :template
 
     def initialize(regex: HOSTSLINE_REX, template: '\1', **params)

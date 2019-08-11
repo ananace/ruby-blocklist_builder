@@ -4,7 +4,7 @@ module BlocklistBuilder
   class Backend
     attr_reader :name
 
-    def self.new(type:, **params)
+    def self.create(type:, **params)
       klass = BlocklistBuilder::Backends.const_get(type.to_s.pascalcase.to_sym)
 
       klass.new(**params)
@@ -21,5 +21,9 @@ module BlocklistBuilder
     def update_entries(_entries)
       raise NotImplementedError
     end
+  end
+
+  module Backends
+    autoload :Hosts, 'blocklist_builder/backends/hosts'
   end
 end
