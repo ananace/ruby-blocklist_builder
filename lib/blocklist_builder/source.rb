@@ -4,11 +4,6 @@ require 'net/http'
 
 module BlocklistBuilder
   class Source
-    # Matches an entry in a hosts file;
-    #
-    #   0.0.0.0 fqdn.goes.here
-    HOSTSLINE_REX = /^(?:\d+\.){3}\d+\s+([\w\-_.]+)/.freeze
-
     attr_reader :name, :description, :url, :regex, :template
     attr_accessor :enabled
 

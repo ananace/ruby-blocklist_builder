@@ -11,7 +11,12 @@ module BlocklistBuilder::Backends
     end
 
     def current_entries
-      @source ||= BlocklistBuilder::Source.create(type: :regexp, name: name, url: 'file:///dev/null').tap do |source|
+      @source ||= BlocklistBuilder::Source.create(
+        type: :regexp,
+        name: name,
+        url: 'file:///dev/null',
+        regex: :strict
+      ).tap do |source|
         source.instance_variable_set :@source_path, @path
         source.instance_eval do
           def raw_data
